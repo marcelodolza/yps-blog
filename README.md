@@ -1,6 +1,6 @@
 # Blog  
 
-![yps-blog](https://user-images.githubusercontent.com/2837790/202992943-567b947a-c4b8-4164-b7f8-2d74995b3899.gif)
+![blog](https://user-images.githubusercontent.com/2837790/203322158-7e851734-fcf5-48b5-ae13-9d3e15ac4506.gif)
 
 ---
 

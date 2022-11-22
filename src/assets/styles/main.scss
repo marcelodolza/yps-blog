@@ -1,0 +1,69 @@
+:root {
+  --bs-primary: #2dc98a;
+  --bs-primary-rgb: 45,201,138;
+  --bs-secondary: #e8eff4;
+  --bs-secondary-rgb: 232,239,244;
+  --bs-dark: #003e52;
+  --bs-dark-rgb: 0,62,82;
+  --animation-cubic: cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.btn-primary{
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-hover-bg: var(--bs-primary);
+  --bs-btn-disabled-bg: var(--bs-primary);
+}
+.btn-secondary{
+  --bs-btn-bg: var(--bs-secondary);
+  --bs-btn-hover-bg: var(--bs-secondary);
+  --bs-btn-disabled-bg: var(--bs-secondary);
+}
+.btn-dark{
+  --bs-btn-bg: var(--bs-dark);
+  --bs-btn-hover-bg: var(--bs-dark);
+  --bs-btn-disabled-bg: var(--bs-dark);
+}
+
+.fade{
+  &-enter-active,
+  &-leave-active {
+    transition: opacity 0.2s ease;
+  }
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+  }
+}
+
+.list {
+  &-enter-active{
+    transition: all 0.4s var(--animation-cubic);
+    transition-delay: calc(0.05s * var(--i));
+  }
+  &-enter-from{
+    opacity: 0;
+    transform: translateX(30px);
+  }
+}
+
+.page{
+  &-enter-from{
+    opacity: 0;
+    transform: translateY(-1rem);
+  }
+  &-enter-active,
+  &-leave-active {
+    transition: all 0.3s var(--animation-cubic);
+  }
+  &-enter,
+  &-leave-to {
+    opacity: 0;
+  }
+}
+
+a > img, .btn{
+  transition: opacity 0.2s ease;
+  &:hover{
+    opacity: 0.8;
+  }
+}

@@ -5,13 +5,19 @@
       class="d-flex justify-content-center align-items-center"
       :class="{ 'w-50': horizontal, 'mb-3': !horizontal }"
     >
-      <img :src="image" class="CardArticle__img card-img-top" :alt="title" />
+      <img
+        :src="image"
+        class="CardArticle__img card-img-top"
+        :alt="title"
+        @click="emit('onClick')"
+      />
     </NuxtLink>
     <div class="card-body px-3" :class="{ 'w-100': horizontal }">
       <NuxtLink :to="`/article/${id}`" class="text-decoration-none text-dark">
         <h4
           class="card-title text-capitalize d-block"
           :class="{ 'fs-6 my-2': horizontal, 'my-4': !horizontal }"
+          @click="emit('onClick')"
         >
           {{ title }}
         </h4>
@@ -19,7 +25,9 @@
       <p class="card-text small fw-light">
         {{ description }}
       </p>
-      <BaseLink :to="`/article/${id}`">Read more</BaseLink>
+      <BaseLink :to="`/article/${id}`" @click="emit('onClick')"
+        >Read more</BaseLink
+      >
     </div>
   </li>
 </template>
@@ -47,6 +55,7 @@ defineProps({
     default: false,
   },
 });
+const emit = defineEmits(["onClick"]);
 </script>
 
 <style lang="scss" scoped>

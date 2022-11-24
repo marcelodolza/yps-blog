@@ -20,6 +20,7 @@
         horizontal
         class="my-2 py-2 px-3 border-top"
         :style="{ '--i': index }"
+        @on-click="focusOut"
       />
     </transition-group>
 
@@ -50,7 +51,8 @@
 <script setup lang="ts">
 import useSearch from "~/composables/useSearch";
 import { Article } from "~/types";
-const { isFocused, termDebounced, loading, data, baseFetch } = useSearch();
+const { focusOut, isFocused, termDebounced, loading, data, baseFetch } =
+  useSearch();
 
 const articles = ref<Article[] | []>();
 

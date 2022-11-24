@@ -60,7 +60,9 @@
           </Transition>
         </button>
       </div>
-      <div class="Search__result position-absolute shadow rounded-bottom">
+      <div
+        class="Search__result position-absolute shadow rounded-bottom custom-scrollbar"
+      >
         <SearchResult />
       </div>
     </div>
@@ -111,6 +113,7 @@ const inputHandler = (e: Event) => {
     height: 0;
     background: white;
     overflow-y: auto;
+    overflow-x: hidden;
     transition: all 0.2s var(--animation-cubic);
     left: -1px;
     right: -1px;

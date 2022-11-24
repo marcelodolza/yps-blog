@@ -50,7 +50,7 @@
             <b class="text-primary mb-3 fs-5 d-block text-capitalize">{{
               article.title
             }}</b>
-            <div class="fw-light fs-5">
+            <div class="fw-light fs-5 fs-md-6">
               {{ article.text }}
             </div>
           </div>

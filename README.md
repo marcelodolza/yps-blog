@@ -15,7 +15,7 @@
 - [x] Search bar
 - [x] Pagination
 - [x] Keyboard navigation in search result
-- [x] Focus on active article in search result
+- [x] Scroll to active article in search result
 - [x] Paginate search results
 - [ ] Storybook
 - [ ] Jest

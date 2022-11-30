@@ -1,5 +1,5 @@
 <template>
-  <div class="SearchResult text-dark">
+  <div v-if="isFocused" class="SearchResult text-dark custom-scrollbar h-100">
     <transition name="fade">
       <div
         v-if="loading || !termDebounced.length"
@@ -11,21 +11,21 @@
 
     <transition-group class="list-unstyled m-0 w-100" tag="ul" name="list">
       <CardArticle
-        v-for="({ id, title, image, intro }, index) in articles"
+        v-for="({ id, title, image, intro, active }, index) in articles"
         :id="id"
         :key="id"
         :title="title"
         :image="image"
         :description="`${intro.slice(0, 120)}...`"
         horizontal
-        class="my-2 py-2 px-3 border-top"
+        class="py-2 px-3 border-top"
         :style="{ '--i': index }"
-        @on-click="focusOut"
+        :active="active"
       />
     </transition-group>
 
     <div
-      v-if="data && !data.length"
+      v-if="articles && !articles.length && !loading && termDebounced"
       class="position-absolute top-0 left-0 w-100 h-100 d-flex justify-content-center align-items-center flex-column"
     >
       <svg
@@ -45,26 +45,37 @@
       </svg>
       <b class="my-2"> No results found </b>
     </div>
+    <Pagination
+      v-if="showPagination"
+      v-model="page"
+      class="py-3 position-relative"
+      :total="total"
+      :limit="limit"
+      :route="false"
+      @update:model-value="getResultFromPage"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import useSearch from "~/composables/useSearch";
-import { Article } from "~/types";
-const { focusOut, isFocused, termDebounced, loading, data, baseFetch } =
-  useSearch();
 
-const articles = ref<Article[] | []>();
+const total = ref(20); // API must provide
+const limit = ref(10);
+const page = ref(1);
+const { isFocused, termDebounced, loading, articles, getResult } = useSearch();
 
-const getResult = async () =>
-  (articles.value = (await baseFetch(termDebounced.value)) as []);
+const showPagination = computed(
+  () => articles.value && articles.value.length === limit.value // Fake
+);
 
-watch(termDebounced, () => (termDebounced.value.length ? getResult() : null));
-watch(isFocused, () => (!isFocused.value ? (articles.value = []) : null));
+const getResultFromPage = (page: number) => getResult(page, limit.value);
 </script>
 
 <style lang="scss" scoped>
 .SearchResult {
+  overflow-y: auto;
+  overflow-x: hidden;
   &__loader {
     z-index: 10;
     background-color: rgba(255, 2500, 255, 0.7);

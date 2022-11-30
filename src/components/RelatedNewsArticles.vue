@@ -1,6 +1,6 @@
 <template>
   <section class="RelatedNewsArticles py-5 bg-secondary">
-    <div v-if="!loading" class="mx-auto container my-4">
+    <div class="mx-auto container my-4">
       <div class="row">
         <div class="col">
           <ul class="list-unstyled row w-100 m-0">
@@ -26,7 +26,7 @@
 </template>
 <script lang="ts" setup>
 import useArticles from "~/composables/useArticles";
-const { loading, articles, getAll } = useArticles();
+const { articles, getAll } = useArticles(); // API must provide
 
 onMounted(() => (!articles.value.length ? getAll() : null));
 </script>

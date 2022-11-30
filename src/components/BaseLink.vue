@@ -25,7 +25,7 @@ defineProps({
   font-size: 15px;
   &:before {
     content: "";
-    transition: all 0.2s var(--animation-cubic);
+    transition: all 0.2s var(--animation-primary);
     background-color: var(--bs-primary);
     position: absolute;
     left: 0;
@@ -35,7 +35,7 @@ defineProps({
     height: 1px;
   }
   &__arrow {
-    transition: all 0.2s var(--animation-cubic);
+    transition: all 0.2s var(--animation-primary);
     transform: translateX(0.4rem);
   }
   &:hover {

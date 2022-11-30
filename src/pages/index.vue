@@ -21,9 +21,12 @@
         </transition-group>
       </section>
       <Pagination
-        :total="59"
+        v-if="total > limit"
+        v-model="currentPage"
+        class="py-5"
+        :total="total"
         :limit="limit"
-        @change-page="getArticlesFromPage"
+        @update:model-value="getArticlesFromPage"
       />
     </div>
   </main>
@@ -32,12 +35,17 @@
 <script lang="ts" setup>
 import useArticles from "~/composables/useArticles";
 const { articles, getArticles } = useArticles();
+const route = useRoute();
 
+const total = ref(59); // API must provide
 const limit = ref(16);
+const currentPage = ref(1);
 
-const getArticlesFromPage = (page: number) => {
-  getArticles(page, limit.value);
-};
+onMounted(() => {
+  if (route.query.page) currentPage.value = Number(route.query.page);
+});
+
+const getArticlesFromPage = (page: number) => getArticles(page, limit.value);
 
 await getArticlesFromPage(1);
 </script>

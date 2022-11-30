@@ -6,6 +6,7 @@ export type Article = {
   intro: string;
   text: string;
   createdAt: string;
+  active?: boolean;
 };
 
 export type OptsFetch = {

@@ -39,8 +39,12 @@
             placeholder="Enter a search term"
             class="Search__input py-2 w-100"
             minlength="3"
-            @focusin="() => (isFocused = true)"
             @input="inputHandler"
+            @focusin="focusIn"
+            @focusout="focusOutInput"
+            @keydown.prevent.up="moveUp"
+            @keydown.prevent.down="moveDown"
+            @keydown.prevent.enter="openActiveArticle"
           />
         </form>
         <button
@@ -61,7 +65,7 @@
         </button>
       </div>
       <div
-        class="Search__result position-absolute shadow rounded-bottom custom-scrollbar"
+        class="Search__result position-absolute shadow rounded-bottom overflow-hidden"
       >
         <SearchResult />
       </div>
@@ -71,15 +75,26 @@
 
 <script setup lang="ts">
 import useSearch from "~/composables/useSearch";
-const { term, isFocused, isTyping, isAllowed, focusOut, changeTerm } =
-  useSearch();
+const {
+  term,
+  isFocused,
+  isTyping,
+  isAllowed,
+  updateTerm,
+  moveUp,
+  moveDown,
+  focusIn,
+  focusOut,
+  focusOutInput,
+  openActiveArticle,
+} = useSearch();
 
 const inputHandler = (e: Event) => {
   const el = e.target as HTMLInputElement;
 
   if (el.value.length < 3) return;
 
-  changeTerm();
+  updateTerm();
 };
 </script>
 
@@ -94,7 +109,7 @@ const inputHandler = (e: Event) => {
   &__input {
     background: transparent;
     border: 0;
-    transition: all 0.3s var(--animation-cubic);
+    transition: all 0.3s var(--animation-primary);
     outline: none;
     color: currentColor;
     padding-left: 30px;
@@ -112,9 +127,7 @@ const inputHandler = (e: Event) => {
   &__result {
     height: 0;
     background: white;
-    overflow-y: auto;
-    overflow-x: hidden;
-    transition: all 0.2s var(--animation-cubic);
+    transition: all 0.2s var(--animation-primary);
     left: -1px;
     right: -1px;
   }
@@ -143,7 +156,8 @@ const inputHandler = (e: Event) => {
   }
   &--completed {
     .Search__result {
-      height: 450px;
+      height: 490px;
+      transition-duration: 0.3s;
     }
   }
 }

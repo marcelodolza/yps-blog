@@ -14,11 +14,11 @@
 - [x] Search composable
 - [x] Search bar
 - [x] Pagination
-- [ ] Paginate search results
-- [ ] Related news article logic
-- [ ] Error handling
+- [x] Keyboard navigation in search result
+- [x] Focus on active article in search result
+- [x] Paginate search results
 - [ ] Storybook
-- [ ] Tests
+- [ ] Jest
 
 
 ---

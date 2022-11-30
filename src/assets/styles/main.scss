@@ -4,7 +4,7 @@
   --bs-secondary: #e8eff4;
   --bs-secondary-rgb: 232,239,244;
   --petrol: #003e52;
-  --animation-cubic: cubic-bezier(0.33, 1, 0.68, 1);
+  --animation-primary: cubic-bezier(0, 0, 0, 1);
 }
 
 .btn{
@@ -41,7 +41,7 @@
 
 .list {
   &-enter-active{
-    transition: all 0.4s var(--animation-cubic);
+    transition: all 0.4s var(--animation-primary);
     transition-delay: calc(0.05s * var(--i));
   }
   &-enter-from{
@@ -57,7 +57,7 @@
   }
   &-enter-active,
   &-leave-active {
-    transition: all 0.3s var(--animation-cubic);
+    transition: all 0.3s var(--animation-primary);
   }
   &-enter,
   &-leave-to {
